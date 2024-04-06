@@ -7,6 +7,10 @@ function App() {
     const [advice, setAdvice] = useState('');
 
     useEffect(() => {
+        fetchNewQuote();
+    }, []);
+
+    const fetchNewQuote = () => {
         axios.get('https://api.adviceslip.com/advice')
             .then((response) => {
                 const { advice } = response.data.slip;
@@ -15,13 +19,13 @@ function App() {
             .catch((error) => {
                 console.log(error);
             });
-    }, []); 
+    };
 
     return (
         <div className="app">
             <div className="card">
                 <h1 className="heading">{advice}</h1>
-                <button className= "button">
+                <button className= "button" onClick = {fetchNewQuote}>
                     <span>GIVE ME ADVICE</span>
                 </button>
             </div>
